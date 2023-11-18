@@ -184,7 +184,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'Example' => App\Facades\Example::class,
+        //'Password' => SavingsMate\Domain\Core\ValueObjects\Password::class,
     ])->toArray(),
 
 ];
