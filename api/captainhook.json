@@ -1,0 +1,25 @@
+{
+    "config": {
+        "run-mode": "docker",
+        "run-exec": "docker exec savings_mate_app"
+    },
+    "commit-msg": {
+        "enabled": false,
+        "actions": []
+    },
+    "pre-commit": {
+        "enabled": true,
+        "actions": [
+            {
+                "action": "php ./vendor/bin/phpstan analyse",
+                "options": [],
+                "conditions": []
+            },
+            {
+                "action": "php artisan test",
+                "options": [],
+                "conditions": []
+            }
+        ]
+    }
+}

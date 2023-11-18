@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SavingsMate\App\Providers;
 
 use Illuminate\Cache\RateLimiting\Limit;
@@ -45,8 +47,8 @@ class RouteServiceProvider extends ServiceProvider
                     'status' => [
                         'code' => Response::HTTP_OK,
                         'message' => 'OK',
-                        'success' => true
-                    ]
+                        'success' => true,
+                    ],
                 ]));
             });
     }

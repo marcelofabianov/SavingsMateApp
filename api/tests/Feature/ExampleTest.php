@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Symfony\Component\HttpFoundation\Response;
 
 test('Route web default')
@@ -15,6 +17,6 @@ test('Route api default')
         'status' => [
             'code' => Response::HTTP_OK,
             'message' => 'OK',
-            'success' => true
-        ]
+            'success' => true,
+        ],
     ]);
