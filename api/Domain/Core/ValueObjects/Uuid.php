@@ -6,12 +6,14 @@ namespace SavingsMate\Domain\Core\ValueObjects;
 
 use Ramsey\Uuid\Uuid as UuidBase;
 use SavingsMate\Domain\Core\Exceptions\CoreValueObjectException;
-use SavingsMate\Domain\Core\ValueObject;
+use SavingsMate\Domain\Core\ToStringJson;
 use SavingsMate\Domain\Interfaces\Core\Exceptions\ICoreValueObjectException;
 use SavingsMate\Domain\Interfaces\Core\ValueObjects\IUuid;
 
-final readonly class Uuid extends ValueObject implements IUuid
+final readonly class Uuid implements IUuid
 {
+    use ToStringJson;
+
     private function __construct(
         private string $value
     ) {

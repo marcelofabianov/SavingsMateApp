@@ -9,12 +9,14 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use Exception;
 use SavingsMate\Domain\Core\Exceptions\CoreValueObjectException;
-use SavingsMate\Domain\Core\ValueObject;
+use SavingsMate\Domain\Core\ToStringJson;
 use SavingsMate\Domain\Interfaces\Core\Exceptions\ICoreValueObjectException;
 use SavingsMate\Domain\Interfaces\Core\ValueObjects\ICreatedAt;
 
-final readonly class CreatedAt extends ValueObject implements ICreatedAt
+final readonly class CreatedAt implements ICreatedAt
 {
+    use ToStringJson;
+
     private const DEFAULT_FORMAT = 'Y-m-d H:i:s';
 
     private function __construct(

@@ -8,7 +8,7 @@ use SavingsMate\Domain\Core\ValueObjects\Email;
 use SavingsMate\Domain\Interfaces\Core\Entities\IUser;
 
 test('Deve criar uma instancia de User com o ICreateDtoUser', function () {
-    $dto = new CreateUserDto(fake()->name, Email::random());
+    $dto = new CreateUserDto(fake()->name(), Email::random());
 
     $user = User::create($dto);
 
@@ -17,7 +17,7 @@ test('Deve criar uma instancia de User com o ICreateDtoUser', function () {
     ->group('Unit', 'Domain', 'Core', 'Entities', 'User');
 
 test('Deve retornar um array com os valores do User', function () {
-    $dto = new CreateUserDto(fake()->name, Email::random());
+    $dto = new CreateUserDto(fake()->name(), Email::random());
 
     $expectedUserToArray = [
         'id' => $dto->id->getValue(),
@@ -38,7 +38,7 @@ test('Deve retornar um array com os valores do User', function () {
     ->group('Unit', 'Domain', 'Core', 'Entities', 'User');
 
 test('Deve retornar uma string com os valores do User', function () {
-    $dto = new CreateUserDto(fake()->name, Email::random());
+    $dto = new CreateUserDto(fake()->name(), Email::random());
 
     $expectedUserToString = json_encode([
         'id' => $dto->id->getValue(),
@@ -59,7 +59,7 @@ test('Deve retornar uma string com os valores do User', function () {
     ->group('Unit', 'Domain', 'Core', 'Entities', 'User');
 
 test('Deve retornar um json valido com os valores do User', function () {
-    $dto = new CreateUserDto(fake()->name, Email::random());
+    $dto = new CreateUserDto(fake()->name(), Email::random());
 
     $expectedUserToJson = json_encode([
         'id' => $dto->id->getValue(),

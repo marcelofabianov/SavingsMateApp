@@ -12,18 +12,6 @@ test('Toda interface de ValueObject extender a interface IValueObject')
     ->expect('SavingsMate\Interfaces\Domain\Core\ValueObjects')
     ->toExtend(IValueObject::class);
 
-test('Classes de ValueObjects devem extender a classe ValueObject')
-    ->expect('SavingsMate\Domain\Core\ValueObjects')
-    ->toExtend(SavingsMate\Domain\Core\ValueObject::class);
-
-test('Classe ValueObject deve ser abstrata')
-    ->expect(SavingsMate\Domain\Core\ValueObject::class)
-    ->toBeAbstract();
-
-test('Classe ValueObject deve ser o metodo __toString()')
-    ->expect(SavingsMate\Domain\Core\ValueObject::class)
-    ->toHaveMethod('__toString');
-
 test('Classes de ValueObjects devem implementar o metodo __toString()')
     ->expect('SavingsMate\Domain\Core\ValueObjects')
     ->toHaveMethod('__toString');

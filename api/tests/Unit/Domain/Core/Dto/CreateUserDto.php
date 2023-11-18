@@ -19,7 +19,7 @@ use SavingsMate\Domain\Interfaces\Core\ValueObjects\IUuid;
 
 test('Deve criar uma nova instancia do CreateUserDto somente dados obrigatorios', function () {
     $data = [
-        'name' => fake()->name,
+        'name' => fake()->name(),
         'email' => Email::random(),
     ];
 
@@ -41,7 +41,7 @@ test('Deve criar uma nova instancia do CreateUserDto somente dados obrigatorios'
 
 test('Deve criar uma nova instancia do CreateUserDto com todos os dados', function () {
     $data = [
-        'name' => fake()->name,
+        'name' => fake()->name(),
         'email' => Email::random(),
         'password' => Password::random(),
         'id' => Uuid::random(),

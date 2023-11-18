@@ -7,11 +7,14 @@ namespace SavingsMate\Domain\Core\ValueObjects;
 use Exception;
 use Illuminate\Support\Str;
 use SavingsMate\Domain\Core\Exceptions\CorePasswordException;
+use SavingsMate\Domain\Core\ToStringJson;
 use SavingsMate\Domain\Interfaces\Core\Exceptions\ICorePasswordException;
 use SavingsMate\Domain\Interfaces\Core\ValueObjects\IPassword;
 
 final class Password implements IPassword
 {
+    use ToStringJson;
+
     private const MIN_LENGTH = 8;
 
     private const MAX_LENGTH = 24;
@@ -34,11 +37,6 @@ final class Password implements IPassword
     public function __toString(): string
     {
         return $this->value;
-    }
-
-    public function toString(): string
-    {
-        return $this->__toString();
     }
 
     public function getValue(): string

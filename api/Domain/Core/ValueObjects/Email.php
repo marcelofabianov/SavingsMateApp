@@ -6,12 +6,14 @@ namespace SavingsMate\Domain\Core\ValueObjects;
 
 use Exception;
 use SavingsMate\Domain\Core\Exceptions\CoreValueObjectException;
-use SavingsMate\Domain\Core\ValueObject;
+use SavingsMate\Domain\Core\ToStringJson;
 use SavingsMate\Domain\Interfaces\Core\Exceptions\ICoreValueObjectException;
 use SavingsMate\Domain\Interfaces\Core\ValueObjects\IEmail;
 
-final readonly class Email extends ValueObject implements IEmail
+final readonly class Email implements IEmail
 {
+    use ToStringJson;
+
     private function __construct(
         private string $value
     ) {
