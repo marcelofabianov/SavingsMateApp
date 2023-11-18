@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace SavingsMate\Tests;
 
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Application;
