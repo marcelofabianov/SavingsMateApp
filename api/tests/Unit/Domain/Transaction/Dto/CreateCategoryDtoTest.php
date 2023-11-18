@@ -12,41 +12,43 @@ use SavingsMate\Domain\Interfaces\Core\ValueObjects\IDeletedAt;
 use SavingsMate\Domain\Interfaces\Core\ValueObjects\IInactivatedAt;
 use SavingsMate\Domain\Interfaces\Core\ValueObjects\IUpdatedAt;
 use SavingsMate\Domain\Interfaces\Core\ValueObjects\IUuid;
-use SavingsMate\Domain\Transaction\Dto\CreateCardDto;
+use SavingsMate\Domain\Transaction\Dto\CreateCategoryDto;
+use SavingsMate\Domain\Transaction\Enums\CategoryColorEnum;
+use SavingsMate\Domain\Transaction\Enums\TransactionTypeEnum;
 
-test('Deve criar uma instancia de CreateCardDto somente com os dados obrigatorios', function () {
+test('Deve criar uma instancia de CreateCategoryDto somente com so dados obrigatorios', function () {
     $data = [
         'userId' => Uuid::random(),
-        'main' => fake()->boolean(),
         'name' => fake()->company(),
-        'limit' => fake()->randomFloat(2, 100, 1000),
+        'color' => CategoryColorEnum::random(),
+        'type' => TransactionTypeEnum::random(),
     ];
 
-    $dto = new CreateCardDto(
+    $dto = new CreateCategoryDto(
         $data['userId'],
-        $data['main'],
         $data['name'],
-        $data['limit']
+        $data['color'],
+        $data['type']
     );
 
     expect($dto->userId)->toBe($data['userId'])
-        ->and($dto->main)->toBe($data['main'])
         ->and($dto->name)->toBe($data['name'])
-        ->and($dto->limit)->toBe($data['limit'])
+        ->and($dto->color)->toBe($data['color'])
+        ->and($dto->type)->toBe($data['type'])
         ->and($dto->id)->toBeInstanceOf(IUuid::class)
         ->and($dto->inactivatedAt)->toBeInstanceOf(IInactivatedAt::class)
         ->and($dto->deletedAt)->toBeInstanceOf(IDeletedAt::class)
         ->and($dto->createdAt)->toBeInstanceOf(ICreatedAt::class)
         ->and($dto->updatedAt)->toBeInstanceOf(IUpdatedAt::class);
 })
-    ->group('Unit', 'Dto', 'Domain', 'Transaction', 'Card');
+    ->group('Unit', 'Dto', 'Domain', 'Transaction', 'Category');
 
-test('Deve criar uma instancia de CreateCardDto com todos os campos', function () {
+test('Deve criar uma instancia de CreateCategoryDto com todos os campos', function () {
     $data = [
         'userId' => Uuid::random(),
-        'main' => fake()->boolean(),
         'name' => fake()->company(),
-        'limit' => fake()->randomFloat(2, 100, 1000),
+        'color' => CategoryColorEnum::random(),
+        'type' => TransactionTypeEnum::random(),
         'id' => Uuid::random(),
         'inactivatedAt' => InactivatedAt::random(),
         'deletedAt' => DeletedAt::random(),
@@ -54,11 +56,11 @@ test('Deve criar uma instancia de CreateCardDto com todos os campos', function (
         'updatedAt' => UpdatedAt::random(),
     ];
 
-    $dto = new CreateCardDto(
+    $dto = new CreateCategoryDto(
         $data['userId'],
-        $data['main'],
         $data['name'],
-        $data['limit'],
+        $data['color'],
+        $data['type'],
         $data['id'],
         $data['inactivatedAt'],
         $data['deletedAt'],
@@ -67,13 +69,13 @@ test('Deve criar uma instancia de CreateCardDto com todos os campos', function (
     );
 
     expect($dto->userId)->toBe($data['userId'])
-        ->and($dto->main)->toBe($data['main'])
         ->and($dto->name)->toBe($data['name'])
-        ->and($dto->limit)->toBe($data['limit'])
+        ->and($dto->color)->toBe($data['color'])
+        ->and($dto->type)->toBe($data['type'])
         ->and($dto->id)->toBe($data['id'])
         ->and($dto->inactivatedAt)->toBe($data['inactivatedAt'])
         ->and($dto->deletedAt)->toBe($data['deletedAt'])
         ->and($dto->createdAt)->toBe($data['createdAt'])
         ->and($dto->updatedAt)->toBe($data['updatedAt']);
 })
-    ->group('Unit', 'Dto', 'Domain', 'Transaction', 'Card');
+    ->group('Unit', 'Dto', 'Domain', 'Transaction', 'Category');
