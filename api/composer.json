@@ -23,8 +23,8 @@
     "autoload": {
         "psr-4": {
             "SavingsMate\\App\\": "app/",
-            "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "SavingsMate\\Database\\Factories\\": "database/factories/",
+            "SavingsMate\\Database\\Seeders\\": "database/seeders/"
         }
     },
     "autoload-dev": {
