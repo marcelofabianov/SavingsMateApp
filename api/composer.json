@@ -1,11 +1,11 @@
 {
-    "name": "laravel/laravel",
+    "name": "marcelofabianov/savings_mate_app",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "..",
+    "keywords": ["SavingsMate"],
     "license": "MIT",
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
+            "SavingsMate\\App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }

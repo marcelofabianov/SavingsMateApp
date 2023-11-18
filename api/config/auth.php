@@ -62,7 +62,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => SavingsMate\App\Models\User::class,
         ],
 
         // 'users' => [

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace SavingsMate\App\Http\Middleware;
 
 use App\Providers\RouteServiceProvider;
 use Closure;

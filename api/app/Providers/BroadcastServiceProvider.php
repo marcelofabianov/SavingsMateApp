@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace SavingsMate\App\Providers;
 
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\ServiceProvider;
