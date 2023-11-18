@@ -99,7 +99,7 @@ test('Deve retornar uma string com os valores do Installment', function () {
 
     $installment = Installment::create($dto);
 
-    expect($installment->toJson())->toBeString()
+    expect($installment->toString())->toBeString()
         ->toEqual($expectedInstallmentToString);
 })
     ->group('Unit', 'Domain', 'Transaction', 'Entities', 'Installment');
