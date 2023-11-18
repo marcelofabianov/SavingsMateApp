@@ -1,19 +1,20 @@
 <?php
 
-namespace SavingsMate\Tests\Feature;
+use Symfony\Component\HttpFoundation\Response;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+test('Route web default')
+    ->get('/')
+    ->assertOk()
+    ->assertSee('.');
 
-class ExampleTest extends TestCase
-{
-    /**
-     * A basic test example.
-     */
-    public function test_the_application_returns_a_successful_response(): void
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
-}
+test('Route api default')
+    ->get('/api')
+    ->assertOk()
+    ->assertJson([
+        'data' => [],
+        'status' => [
+            'code' => Response::HTTP_OK,
+            'message' => 'OK',
+            'success' => true
+        ]
+    ]);

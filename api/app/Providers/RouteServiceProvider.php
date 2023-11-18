@@ -30,7 +30,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->as('web.')
             ->group(function () {
-                Route::name('default')->get('/', fn () => '');
+                Route::name('default')->get('/', fn () => '.');
             });
     }
 
