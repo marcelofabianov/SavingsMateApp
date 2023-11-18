@@ -7,11 +7,10 @@ namespace SavingsMate\Domain\Core\ValueObjects;
 use Exception;
 use Illuminate\Support\Str;
 use SavingsMate\Domain\Core\Exceptions\CorePasswordException;
-use SavingsMate\Domain\Core\ValueObject;
 use SavingsMate\Domain\Interfaces\Core\Exceptions\ICorePasswordException;
 use SavingsMate\Domain\Interfaces\Core\ValueObjects\IPassword;
 
-final readonly class Password extends ValueObject implements IPassword
+final class Password implements IPassword
 {
     private const MIN_LENGTH = 8;
 
@@ -25,14 +24,21 @@ final readonly class Password extends ValueObject implements IPassword
 
     private const PASSWORD_CONTAINS_SPACES = false;
 
+    private static string $message;
+
     private function __construct(
-        private string $value
+        private readonly string $value
     ) {
     }
 
     public function __toString(): string
     {
         return $this->value;
+    }
+
+    public function toString(): string
+    {
+        return $this->__toString();
     }
 
     public function getValue(): string
@@ -60,9 +66,7 @@ final readonly class Password extends ValueObject implements IPassword
     private static function validateLettersUppercase(string $value): bool
     {
         $letters = [
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
-            'K', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
-            'U', 'V', 'X', 'Y', 'Z',
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
         ];
 
         if (Str::contains($value, $letters)) {
@@ -75,9 +79,7 @@ final readonly class Password extends ValueObject implements IPassword
     private static function validateLettersLowercase(string $value): bool
     {
         $letters = [
-            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-            'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-            'u', 'v', 'x', 'y', 'z',
+            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
         ];
 
         if (Str::contains($value, $letters)) {
@@ -90,26 +92,42 @@ final readonly class Password extends ValueObject implements IPassword
     public static function validate(string $value): bool
     {
         if (Str::contains($value, ' ')) {
+            self::$message = 'Password cannot contain spaces';
+
             return false;
         }
 
         if (! self::validateLettersLowercase($value)) {
+            self::$message = 'Password must contain at least one lowercase letter';
+
             return false;
         }
 
         if (! self::validateLettersUppercase($value)) {
+            self::$message = 'Password must contain at least one uppercase letter';
+
             return false;
         }
 
         if (! self::validateNumbers($value)) {
+            self::$message = 'Password must contain at least one number';
+
             return false;
         }
 
         if (! self::validateSymbols($value)) {
+            self::$message = 'Password must contain at least one symbol';
+
             return false;
         }
 
-        return Str::length($value) >= self::MIN_LENGTH && Str::length($value) <= self::MAX_LENGTH;
+        if (! (Str::length($value) >= self::MIN_LENGTH)) {
+            self::$message = 'Password must contain at least '.self::MIN_LENGTH.' characters';
+
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -125,6 +143,16 @@ final readonly class Password extends ValueObject implements IPassword
             spaces: self::PASSWORD_CONTAINS_SPACES
         );
 
+        $lowercase = 'abcdefghijklmnopqrstuvwxyz';
+        $uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $numbers = '0123456789';
+        $specialChars = '~!#$%^&*()-_./<>?/\\{}[]|:;';
+
+        $random .= $lowercase[random_int(0, strlen($lowercase) - 1)];
+        $random .= $uppercase[random_int(0, strlen($uppercase) - 1)];
+        $random .= $numbers[random_int(0, strlen($numbers) - 1)];
+        $random .= $specialChars[random_int(0, strlen($specialChars) - 1)];
+
         return self::create($random);
     }
 
@@ -138,7 +166,7 @@ final readonly class Password extends ValueObject implements IPassword
         }
 
         if (! self::validate($value)) {
-            throw CorePasswordException::badPassword();
+            throw CorePasswordException::badPassword($value, self::$message);
         }
 
         return new self($value);

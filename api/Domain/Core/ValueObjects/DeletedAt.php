@@ -39,6 +39,10 @@ final readonly class DeletedAt extends ValueObject implements IDeletedAt
 
     public function format(string $format = self::DEFAULT_FORMAT): string|null
     {
+        if ($this->value === null) {
+            return null;
+        }
+
         try {
             return $this->value?->format($format);
         } catch (Exception) {

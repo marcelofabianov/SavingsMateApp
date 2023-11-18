@@ -64,8 +64,5 @@ test('Deve retornar false quando a senha informada for diferente da senha da ins
 test('Deve criar uma nova instancia de Password com senha aleatoria valida')
     ->group('Password', 'ValueObject', 'Domain', 'Core', 'Unit')
     ->expect(Password::random())->toBeInstanceOf(IPassword::class)
-    ->and(Password::validate(Password::random()->getValue()))->toBeTrue();
-
-test('Deve criar uma nova instancia de Password com senha aleatoria valida com tamanho informado')
-    ->group('Password', 'ValueObject', 'Domain', 'Core', 'Unit')
-    ->expect(Password::random())->toBeInstanceOf(IPassword::class);
+    ->and(Password::validate(Password::random()->getValue()))->toBeTrue()
+    ->repeat(random_int(100, 200));

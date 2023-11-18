@@ -8,5 +8,5 @@ use SavingsMate\Domain\Interfaces\Exceptions\ISavingsMateException;
 
 interface ICorePasswordException extends ISavingsMateException
 {
-    public static function badPassword(): self;
+    public static function badPassword(string $message, string $value): self;
 }

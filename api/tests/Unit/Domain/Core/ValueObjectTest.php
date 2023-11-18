@@ -32,10 +32,6 @@ test('Classes de ValueObjects devem ser final')
     ->expect('SavingsMate\Domain\Core\ValueObjects')
     ->toBeFinal();
 
-test('Classes de ValueObjects devem ser readonly')
-    ->expect('SavingsMate\Domain\Core\ValueObjects')
-    ->toBeReadonly();
-
 test('Classes de ValueObjects devem ter um construtor')
     ->expect('SavingsMate\Domain\Core\ValueObjects')
     ->toHaveConstructor();

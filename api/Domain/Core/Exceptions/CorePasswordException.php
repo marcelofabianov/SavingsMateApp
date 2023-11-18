@@ -9,8 +9,8 @@ use SavingsMate\Domain\Interfaces\Core\Exceptions\ICorePasswordException;
 
 final class CorePasswordException extends SavingsMateException implements ICorePasswordException
 {
-    public static function badPassword(): ICorePasswordException
+    public static function badPassword(string $message, string $value): ICorePasswordException
     {
-        return new self('It is not a secure password');
+        return new self($message.': '.$value);
     }
 }
