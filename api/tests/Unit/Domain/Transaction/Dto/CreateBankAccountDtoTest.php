@@ -2,48 +2,45 @@
 
 declare(strict_types=1);
 
-use SavingsMate\Domain\Core\Dto\CreateUserDto;
 use SavingsMate\Domain\Core\ValueObjects\CreatedAt;
 use SavingsMate\Domain\Core\ValueObjects\DeletedAt;
-use SavingsMate\Domain\Core\ValueObjects\Email;
 use SavingsMate\Domain\Core\ValueObjects\InactivatedAt;
-use SavingsMate\Domain\Core\ValueObjects\Password;
 use SavingsMate\Domain\Core\ValueObjects\UpdatedAt;
 use SavingsMate\Domain\Core\ValueObjects\Uuid;
 use SavingsMate\Domain\Interfaces\Core\ValueObjects\ICreatedAt;
 use SavingsMate\Domain\Interfaces\Core\ValueObjects\IDeletedAt;
 use SavingsMate\Domain\Interfaces\Core\ValueObjects\IInactivatedAt;
-use SavingsMate\Domain\Interfaces\Core\ValueObjects\IPassword;
 use SavingsMate\Domain\Interfaces\Core\ValueObjects\IUpdatedAt;
 use SavingsMate\Domain\Interfaces\Core\ValueObjects\IUuid;
+use SavingsMate\Domain\Transaction\Dto\CreateBankAccountDto;
 
-test('Deve criar uma nova instancia do CreateUserDto somente com os dados obrigatorios', function () {
+test('Deve criar um instancia de CreateBankAccountDto somente com os dados obrigatorios', function () {
     $data = [
-        'name' => fake()->name(),
-        'email' => Email::random(),
+        'main' => fake()->boolean(),
+        'name' => fake()->company(),
     ];
 
-    $dto = new CreateUserDto(
-        $data['name'],
-        $data['email']
+    $dto = new CreateBankAccountDto(
+        $data['main'],
+        $data['name']
     );
 
-    expect($dto->name)->toBe($data['name'])
-        ->and($dto->email)->toBe($data['email'])
-        ->and($dto->password)->toBeInstanceOf(IPassword::class)
+    expect($dto->main)->toBe($data['main'])
+        ->and($dto->name)->toBe($data['name'])
+        ->and($dto->description)->toBeNull()
         ->and($dto->id)->toBeInstanceOf(IUuid::class)
         ->and($dto->inactivatedAt)->toBeInstanceOf(IInactivatedAt::class)
         ->and($dto->deletedAt)->toBeInstanceOf(IDeletedAt::class)
         ->and($dto->createdAt)->toBeInstanceOf(ICreatedAt::class)
         ->and($dto->updatedAt)->toBeInstanceOf(IUpdatedAt::class);
 })
-    ->group('Unit', 'Dto', 'Domain', 'Core', 'User');
+    ->group('Unit', 'Dto', 'Domain', 'Transaction', 'BankAccount');
 
-test('Deve criar uma nova instancia do CreateUserDto com todos os dados', function () {
+test('Deve criar um instancia de CreateBankAccountDto com todos os dados', function () {
     $data = [
-        'name' => fake()->name(),
-        'email' => Email::random(),
-        'password' => Password::random(),
+        'main' => fake()->boolean(),
+        'name' => fake()->company(),
+        'description' => fake()->text(),
         'id' => Uuid::random(),
         'inactivatedAt' => InactivatedAt::random(),
         'deletedAt' => DeletedAt::random(),
@@ -51,10 +48,10 @@ test('Deve criar uma nova instancia do CreateUserDto com todos os dados', functi
         'updatedAt' => UpdatedAt::random(),
     ];
 
-    $dto = new CreateUserDto(
+    $dto = new CreateBankAccountDto(
+        $data['main'],
         $data['name'],
-        $data['email'],
-        $data['password'],
+        $data['description'],
         $data['id'],
         $data['inactivatedAt'],
         $data['deletedAt'],
@@ -62,13 +59,13 @@ test('Deve criar uma nova instancia do CreateUserDto com todos os dados', functi
         $data['updatedAt']
     );
 
-    expect($dto->name)->toBe($data['name'])
-        ->and($dto->email)->toBe($data['email'])
-        ->and($dto->password)->toBe($data['password'])
+    expect($dto->main)->toBe($data['main'])
+        ->and($dto->name)->toBe($data['name'])
+        ->and($dto->description)->toBe($data['description'])
         ->and($dto->id)->toBe($data['id'])
         ->and($dto->inactivatedAt)->toBe($data['inactivatedAt'])
         ->and($dto->deletedAt)->toBe($data['deletedAt'])
         ->and($dto->createdAt)->toBe($data['createdAt'])
         ->and($dto->updatedAt)->toBe($data['updatedAt']);
 })
-    ->group('Unit', 'Dto', 'Domain', 'Core', 'User');
+    ->group('Unit', 'Dto', 'Domain', 'Transaction', 'BankAccount');
