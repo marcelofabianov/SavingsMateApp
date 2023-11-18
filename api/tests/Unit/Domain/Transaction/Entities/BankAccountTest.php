@@ -2,12 +2,17 @@
 
 declare(strict_types=1);
 
+use SavingsMate\Domain\Core\ValueObjects\Uuid;
 use SavingsMate\Domain\Interfaces\Transaction\Entities\IBankAccount;
 use SavingsMate\Domain\Transaction\Dto\CreateBankAccountDto;
 use SavingsMate\Domain\Transaction\Entities\BankAccount;
 
 test('Deve criar uma instancia de BankAccount com o ICreateBankAccountDto', function () {
-    $dto = new CreateBankAccountDto(true, fake()->company());
+    $dto = new CreateBankAccountDto(
+        Uuid::random(),
+        true,
+        fake()->company()
+    );
 
     $bankAccount = BankAccount::create($dto);
 
@@ -16,10 +21,15 @@ test('Deve criar uma instancia de BankAccount com o ICreateBankAccountDto', func
     ->group('Unit', 'Domain', 'Transaction', 'Entities', 'BankAccount');
 
 test('Deve retornar um array com os valores do BankAccount', function () {
-    $dto = new CreateBankAccountDto(true, fake()->company());
+    $dto = new CreateBankAccountDto(
+        Uuid::random(),
+        true,
+        fake()->company()
+    );
 
     $expectedBankAccountToArray = [
         'id' => $dto->id->getValue(),
+        'userId' => $dto->userId->getValue(),
         'name' => $dto->name,
         'main' => $dto->main,
         'description' => $dto->description,
@@ -37,10 +47,15 @@ test('Deve retornar um array com os valores do BankAccount', function () {
     ->group('Unit', 'Domain', 'Transaction', 'Entities', 'BankAccount');
 
 test('Deve retornar uma string com os valores do BankAccount', function () {
-    $dto = new CreateBankAccountDto(true, fake()->company());
+    $dto = new CreateBankAccountDto(
+        Uuid::random(),
+        true,
+        fake()->company()
+    );
 
     $expectedBankAccountToString = json_encode([
         'id' => $dto->id->getValue(),
+        'userId' => $dto->userId->getValue(),
         'name' => $dto->name,
         'main' => $dto->main,
         'description' => $dto->description,
@@ -58,10 +73,15 @@ test('Deve retornar uma string com os valores do BankAccount', function () {
     ->group('Unit', 'Domain', 'Transaction', 'Entities', 'BankAccount');
 
 test('Deve retornar uma string json com os valores do BankAccount', function () {
-    $dto = new CreateBankAccountDto(true, fake()->company());
+    $dto = new CreateBankAccountDto(
+        Uuid::random(),
+        true,
+        fake()->company()
+    );
 
     $expectedBankAccountToJson = json_encode([
         'id' => $dto->id->getValue(),
+        'userId' => $dto->userId->getValue(),
         'name' => $dto->name,
         'main' => $dto->main,
         'description' => $dto->description,

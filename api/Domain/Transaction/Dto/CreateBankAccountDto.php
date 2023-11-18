@@ -21,6 +21,8 @@ use SavingsMate\Domain\Transaction\Exceptions\TransactionDtoException;
 
 final readonly class CreateBankAccountDto implements ICreateBankAccountDto
 {
+    public IUuid $userId;
+
     public string $name;
 
     public bool $main;
@@ -41,6 +43,7 @@ final readonly class CreateBankAccountDto implements ICreateBankAccountDto
      * @throws ITransactionDtoException
      */
     public function __construct(
+        IUuid $userId,
         bool $main,
         string $name,
         ?string $description = null,
@@ -51,6 +54,7 @@ final readonly class CreateBankAccountDto implements ICreateBankAccountDto
         ?IUpdatedAt $updatedAt = null
     ) {
         try {
+            $this->userId = $userId;
             $this->main = $main;
             $this->name = $name;
             $this->description = $description;

@@ -14,6 +14,7 @@ use SavingsMate\Domain\Interfaces\Core\ValueObjects\IUuid;
 interface ICreateBankAccountDto extends IDto
 {
     public function __construct(
+        IUuid $userId,
         bool $main,
         string $name,
         ?string $description = null,

@@ -16,16 +16,19 @@ use SavingsMate\Domain\Transaction\Dto\CreateBankAccountDto;
 
 test('Deve criar um instancia de CreateBankAccountDto somente com os dados obrigatorios', function () {
     $data = [
+        'userId' => Uuid::random(),
         'main' => fake()->boolean(),
         'name' => fake()->company(),
     ];
 
     $dto = new CreateBankAccountDto(
+        $data['userId'],
         $data['main'],
         $data['name']
     );
 
-    expect($dto->main)->toBe($data['main'])
+    expect($dto->userId)->toBe($data['userId'])
+        ->and($dto->main)->toBe($data['main'])
         ->and($dto->name)->toBe($data['name'])
         ->and($dto->description)->toBeNull()
         ->and($dto->id)->toBeInstanceOf(IUuid::class)
@@ -38,6 +41,7 @@ test('Deve criar um instancia de CreateBankAccountDto somente com os dados obrig
 
 test('Deve criar um instancia de CreateBankAccountDto com todos os dados', function () {
     $data = [
+        'userId' => Uuid::random(),
         'main' => fake()->boolean(),
         'name' => fake()->company(),
         'description' => fake()->text(),
@@ -49,6 +53,7 @@ test('Deve criar um instancia de CreateBankAccountDto com todos os dados', funct
     ];
 
     $dto = new CreateBankAccountDto(
+        $data['userId'],
         $data['main'],
         $data['name'],
         $data['description'],
@@ -59,7 +64,8 @@ test('Deve criar um instancia de CreateBankAccountDto com todos os dados', funct
         $data['updatedAt']
     );
 
-    expect($dto->main)->toBe($data['main'])
+    expect($dto->userId)->toBe($data['userId'])
+        ->and($dto->main)->toBe($data['main'])
         ->and($dto->name)->toBe($data['name'])
         ->and($dto->description)->toBe($data['description'])
         ->and($dto->id)->toBe($data['id'])

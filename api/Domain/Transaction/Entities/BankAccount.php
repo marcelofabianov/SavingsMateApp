@@ -20,6 +20,7 @@ final readonly class BankAccount extends Entity implements IBankAccount
 {
     private function __construct(
         private IUuid $id,
+        private IUuid $userId,
         private string $name,
         private bool $main,
         private ?string $description,
@@ -34,6 +35,7 @@ final readonly class BankAccount extends Entity implements IBankAccount
     {
         return [
             'id' => $this->id->getValue(),
+            'userId' => $this->userId->getValue(),
             'name' => $this->name,
             'main' => $this->main,
             'description' => $this->description,
@@ -52,6 +54,7 @@ final readonly class BankAccount extends Entity implements IBankAccount
         try {
             return new self(
                 id: $dto->id,
+                userId: $dto->userId,
                 name: $dto->name,
                 main: $dto->main,
                 description: $dto->description,
