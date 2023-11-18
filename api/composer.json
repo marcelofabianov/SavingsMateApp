@@ -8,6 +8,7 @@
         "php": "^8.2",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
+        "laravel/pail": "^1.0",
         "laravel/tinker": "^2.8"
     },
     "require-dev": {
@@ -19,7 +20,9 @@
         "nunomaduro/collision": "^7.0",
         "nunomaduro/larastan": "^2.0",
         "pestphp/pest": "^2.24",
+        "pestphp/pest-plugin-stressless": "^2.0",
         "pestphp/pest-plugin-type-coverage": "^2.4",
+        "pestphp/pest-plugin-watch": "^2.0",
         "phpunit/phpunit": "^10.1",
         "pyrech/composer-changelogs": "^2.1",
         "roave/security-advisories": "dev-latest",
