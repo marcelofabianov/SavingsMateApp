@@ -15,7 +15,7 @@ use SavingsMate\Domain\Interfaces\Core\ValueObjects\IUuid;
  * @property-read IUuid $userId
  * @property-read bool $main
  * @property-read string $name
- * @property-read string|null $description
+ * @property-read float $initialBalance
  * @property-read IUuid $id
  * @property-read IInactivatedAt $inactivatedAt
  * @property-read IDeletedAt $deletedAt
@@ -28,7 +28,7 @@ interface ICreateBankAccountDto extends IDto
         IUuid $userId,
         bool $main,
         string $name,
-        ?string $description = null,
+        float $initialBalance,
         ?IUuid $id = null,
         ?IInactivatedAt $inactivatedAt = null,
         ?IDeletedAt $deletedAt = null,

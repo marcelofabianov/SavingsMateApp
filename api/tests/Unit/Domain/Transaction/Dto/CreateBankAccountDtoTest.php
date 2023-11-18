@@ -19,18 +19,20 @@ test('Deve criar um instancia de CreateBankAccountDto somente com os dados obrig
         'userId' => Uuid::random(),
         'main' => fake()->boolean(),
         'name' => fake()->company(),
+        'initialBalance' => fake()->randomFloat(2, 0, 1000),
     ];
 
     $dto = new CreateBankAccountDto(
         $data['userId'],
         $data['main'],
-        $data['name']
+        $data['name'],
+        $data['initialBalance']
     );
 
     expect($dto->userId)->toBe($data['userId'])
         ->and($dto->main)->toBe($data['main'])
         ->and($dto->name)->toBe($data['name'])
-        ->and($dto->description)->toBeNull()
+        ->and($dto->initialBalance)->toBe($data['initialBalance'])
         ->and($dto->id)->toBeInstanceOf(IUuid::class)
         ->and($dto->inactivatedAt)->toBeInstanceOf(IInactivatedAt::class)
         ->and($dto->deletedAt)->toBeInstanceOf(IDeletedAt::class)
@@ -44,7 +46,7 @@ test('Deve criar um instancia de CreateBankAccountDto com todos os dados', funct
         'userId' => Uuid::random(),
         'main' => fake()->boolean(),
         'name' => fake()->company(),
-        'description' => fake()->text(),
+        'initialBalance' => fake()->randomFloat(2, 0, 1000),
         'id' => Uuid::random(),
         'inactivatedAt' => InactivatedAt::random(),
         'deletedAt' => DeletedAt::random(),
@@ -56,7 +58,7 @@ test('Deve criar um instancia de CreateBankAccountDto com todos os dados', funct
         $data['userId'],
         $data['main'],
         $data['name'],
-        $data['description'],
+        $data['initialBalance'],
         $data['id'],
         $data['inactivatedAt'],
         $data['deletedAt'],
@@ -67,7 +69,7 @@ test('Deve criar um instancia de CreateBankAccountDto com todos os dados', funct
     expect($dto->userId)->toBe($data['userId'])
         ->and($dto->main)->toBe($data['main'])
         ->and($dto->name)->toBe($data['name'])
-        ->and($dto->description)->toBe($data['description'])
+        ->and($dto->initialBalance)->toBe($data['initialBalance'])
         ->and($dto->id)->toBe($data['id'])
         ->and($dto->inactivatedAt)->toBe($data['inactivatedAt'])
         ->and($dto->deletedAt)->toBe($data['deletedAt'])
