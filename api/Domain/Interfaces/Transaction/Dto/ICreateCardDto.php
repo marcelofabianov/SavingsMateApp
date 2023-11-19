@@ -16,7 +16,7 @@ use SavingsMate\Domain\Transaction\Enums\CardTypeEnum;
 /**
  * @property-read IUuid $userId
  * @property-read bool $main
- * @property-read int $lastFourDigits
+ * @property-read string $lastFourDigits
  * @property-read string $name
  * @property-read float $limit
  * @property-read CardTypeEnum $type
@@ -32,7 +32,7 @@ interface ICreateCardDto extends IDto
     public function __construct(
         IUuid $userId,
         bool $main,
-        int $lastFourDigits,
+        string $lastFourDigits,
         string $name,
         float $limit,
         CardTypeEnum $type,

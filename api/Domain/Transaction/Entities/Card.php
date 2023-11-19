@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace SavingsMate\Domain\Transaction\Entities;
 
+use DateTimeInterface;
 use SavingsMate\Domain\Core\Entity;
 use SavingsMate\Domain\Interfaces\Core\ValueObjects\ICreatedAt;
 use SavingsMate\Domain\Interfaces\Core\ValueObjects\IDeletedAt;
@@ -25,8 +26,10 @@ final readonly class Card extends Entity implements ICard
         private IUuid $userId,
         private string $name,
         private bool $main,
-        private int $lastFourDigits,
+        private string $lastFourDigits,
         private float $limit,
+        private init $billingCycleDay,
+        private DateTimeInterface $expirationDate,
         private CardTypeEnum $type,
         private CardScopeEnum $scope,
         private IInactivatedAt $inactivatedAt,
