@@ -13,6 +13,8 @@ use SavingsMate\Domain\Interfaces\Core\ValueObjects\IUuid;
 use SavingsMate\Domain\Interfaces\Transaction\Dto\ICreateCardDto;
 use SavingsMate\Domain\Interfaces\Transaction\Entities\ICard;
 use SavingsMate\Domain\Interfaces\Transaction\Exceptions\ITransactionEntityException;
+use SavingsMate\Domain\Transaction\Enums\CardScopeEnum;
+use SavingsMate\Domain\Transaction\Enums\CardTypeEnum;
 use SavingsMate\Domain\Transaction\Exceptions\TransactionEntityException;
 use Throwable;
 
@@ -23,7 +25,10 @@ final readonly class Card extends Entity implements ICard
         private IUuid $userId,
         private string $name,
         private bool $main,
+        private int $lastFourDigits,
         private float $limit,
+        private CardTypeEnum $type,
+        private CardScopeEnum $scope,
         private IInactivatedAt $inactivatedAt,
         private IDeletedAt $deletedAt,
         private ICreatedAt $createdAt,
@@ -38,7 +43,10 @@ final readonly class Card extends Entity implements ICard
             'userId' => $this->userId->getValue(),
             'name' => $this->name,
             'main' => $this->main,
+            'lastFourDigits' => $this->lastFourDigits,
             'limit' => $this->limit,
+            'type' => $this->type->value,
+            'scope' => $this->scope->value,
             'inactivatedAt' => $this->inactivatedAt->format(),
             'deletedAt' => $this->deletedAt->format(),
             'createdAt' => $this->createdAt->format(),
@@ -57,7 +65,10 @@ final readonly class Card extends Entity implements ICard
                 userId: $dto->userId,
                 name: $dto->name,
                 main: $dto->main,
+                lastFourDigits: $dto->lastFourDigits,
                 limit: $dto->limit,
+                type: $dto->type,
+                scope: $dto->scope,
                 inactivatedAt: $dto->inactivatedAt,
                 deletedAt: $dto->deletedAt,
                 createdAt: $dto->createdAt,

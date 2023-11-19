@@ -9,10 +9,12 @@ use SavingsMate\Domain\Transaction\Entities\BankAccount;
 
 test('Deve criar uma instancia de BankAccount com o ICreateBankAccountDto', function () {
     $dto = new CreateBankAccountDto(
-        Uuid::random(),
-        true,
-        fake()->company(),
-        fake()->randomFloat(2, 0, 1000)
+        userId: Uuid::random(),
+        main: fake()->boolean(),
+        agencyIdentifier: (string) fake()->randomNumber(4),
+        accountIdentifier: (string) fake()->randomNumber(6),
+        name: fake()->company(),
+        initialBalance: fake()->randomFloat(2, 0, 1000)
     );
 
     $bankAccount = BankAccount::create($dto);
@@ -23,10 +25,12 @@ test('Deve criar uma instancia de BankAccount com o ICreateBankAccountDto', func
 
 test('Deve retornar um array com os valores do BankAccount', function () {
     $dto = new CreateBankAccountDto(
-        Uuid::random(),
-        true,
-        fake()->company(),
-        fake()->randomFloat(2, 0, 1000)
+        userId: Uuid::random(),
+        main: fake()->boolean(),
+        agencyIdentifier: (string) fake()->randomNumber(4),
+        accountIdentifier: (string) fake()->randomNumber(6),
+        name: fake()->company(),
+        initialBalance: fake()->randomFloat(2, 0, 1000)
     );
 
     $expectedBankAccountToArray = [
@@ -34,6 +38,8 @@ test('Deve retornar um array com os valores do BankAccount', function () {
         'userId' => $dto->userId->getValue(),
         'name' => $dto->name,
         'main' => $dto->main,
+        'agencyIdentifier' => $dto->agencyIdentifier,
+        'accountIdentifier' => $dto->accountIdentifier,
         'initialBalance' => $dto->initialBalance,
         'inactivatedAt' => $dto->inactivatedAt->format(),
         'deletedAt' => $dto->deletedAt->format(),
@@ -50,10 +56,12 @@ test('Deve retornar um array com os valores do BankAccount', function () {
 
 test('Deve retornar uma string com os valores do BankAccount', function () {
     $dto = new CreateBankAccountDto(
-        Uuid::random(),
-        true,
-        fake()->company(),
-        fake()->randomFloat(2, 0, 1000)
+        userId: Uuid::random(),
+        main: fake()->boolean(),
+        agencyIdentifier: (string) fake()->randomNumber(4),
+        accountIdentifier: (string) fake()->randomNumber(6),
+        name: fake()->company(),
+        initialBalance: fake()->randomFloat(2, 0, 1000)
     );
 
     $expectedBankAccountToString = json_encode([
@@ -61,6 +69,8 @@ test('Deve retornar uma string com os valores do BankAccount', function () {
         'userId' => $dto->userId->getValue(),
         'name' => $dto->name,
         'main' => $dto->main,
+        'agencyIdentifier' => $dto->agencyIdentifier,
+        'accountIdentifier' => $dto->accountIdentifier,
         'initialBalance' => $dto->initialBalance,
         'inactivatedAt' => $dto->inactivatedAt->format(),
         'deletedAt' => $dto->deletedAt->format(),
@@ -77,10 +87,12 @@ test('Deve retornar uma string com os valores do BankAccount', function () {
 
 test('Deve retornar uma string json com os valores do BankAccount', function () {
     $dto = new CreateBankAccountDto(
-        Uuid::random(),
-        true,
-        fake()->company(),
-        fake()->randomFloat(2, 0, 1000)
+        userId: Uuid::random(),
+        main: fake()->boolean(),
+        agencyIdentifier: (string) fake()->randomNumber(4),
+        accountIdentifier: (string) fake()->randomNumber(6),
+        name: fake()->company(),
+        initialBalance: fake()->randomFloat(2, 0, 1000)
     );
 
     $expectedBankAccountToJson = json_encode([
@@ -88,6 +100,8 @@ test('Deve retornar uma string json com os valores do BankAccount', function () 
         'userId' => $dto->userId->getValue(),
         'name' => $dto->name,
         'main' => $dto->main,
+        'agencyIdentifier' => $dto->agencyIdentifier,
+        'accountIdentifier' => $dto->accountIdentifier,
         'initialBalance' => $dto->initialBalance,
         'inactivatedAt' => $dto->inactivatedAt->format(),
         'deletedAt' => $dto->deletedAt->format(),

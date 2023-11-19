@@ -18,6 +18,8 @@ test('Deve criar um instancia de CreateBankAccountDto somente com os dados obrig
     $data = [
         'userId' => Uuid::random(),
         'main' => fake()->boolean(),
+        'agencyIdentifier' => (string) fake()->randomNumber(4),
+        'accountIdentifier' => (string) fake()->randomNumber(6),
         'name' => fake()->company(),
         'initialBalance' => fake()->randomFloat(2, 0, 1000),
     ];
@@ -25,12 +27,16 @@ test('Deve criar um instancia de CreateBankAccountDto somente com os dados obrig
     $dto = new CreateBankAccountDto(
         $data['userId'],
         $data['main'],
+        $data['agencyIdentifier'],
+        $data['accountIdentifier'],
         $data['name'],
         $data['initialBalance']
     );
 
     expect($dto->userId)->toBe($data['userId'])
         ->and($dto->main)->toBe($data['main'])
+        ->and($dto->agencyIdentifier)->toBe($data['agencyIdentifier'])
+        ->and($dto->accountIdentifier)->toBe($data['accountIdentifier'])
         ->and($dto->name)->toBe($data['name'])
         ->and($dto->initialBalance)->toBe($data['initialBalance'])
         ->and($dto->id)->toBeInstanceOf(IUuid::class)
@@ -45,6 +51,8 @@ test('Deve criar um instancia de CreateBankAccountDto com todos os dados', funct
     $data = [
         'userId' => Uuid::random(),
         'main' => fake()->boolean(),
+        'agencyIdentifier' => (string) fake()->randomNumber(4),
+        'accountIdentifier' => (string) fake()->randomNumber(6),
         'name' => fake()->company(),
         'initialBalance' => fake()->randomFloat(2, 0, 1000),
         'id' => Uuid::random(),
@@ -57,6 +65,8 @@ test('Deve criar um instancia de CreateBankAccountDto com todos os dados', funct
     $dto = new CreateBankAccountDto(
         $data['userId'],
         $data['main'],
+        $data['agencyIdentifier'],
+        $data['accountIdentifier'],
         $data['name'],
         $data['initialBalance'],
         $data['id'],
@@ -68,6 +78,8 @@ test('Deve criar um instancia de CreateBankAccountDto com todos os dados', funct
 
     expect($dto->userId)->toBe($data['userId'])
         ->and($dto->main)->toBe($data['main'])
+        ->and($dto->agencyIdentifier)->toBe($data['agencyIdentifier'])
+        ->and($dto->accountIdentifier)->toBe($data['accountIdentifier'])
         ->and($dto->name)->toBe($data['name'])
         ->and($dto->initialBalance)->toBe($data['initialBalance'])
         ->and($dto->id)->toBe($data['id'])

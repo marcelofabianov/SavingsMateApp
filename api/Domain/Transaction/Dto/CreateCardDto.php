@@ -17,6 +17,8 @@ use SavingsMate\Domain\Interfaces\Core\ValueObjects\IUpdatedAt;
 use SavingsMate\Domain\Interfaces\Core\ValueObjects\IUuid;
 use SavingsMate\Domain\Interfaces\Transaction\Dto\ICreateCardDto;
 use SavingsMate\Domain\Interfaces\Transaction\Exceptions\ITransactionDtoException;
+use SavingsMate\Domain\Transaction\Enums\CardScopeEnum;
+use SavingsMate\Domain\Transaction\Enums\CardTypeEnum;
 use SavingsMate\Domain\Transaction\Exceptions\TransactionDtoException;
 
 final readonly class CreateCardDto implements ICreateCardDto
@@ -25,9 +27,15 @@ final readonly class CreateCardDto implements ICreateCardDto
 
     public bool $main;
 
+    public int $lastFourDigits;
+
     public string $name;
 
     public float $limit;
+
+    public CardTypeEnum $type;
+
+    public CardScopeEnum $scope;
 
     public IUuid $id;
 
@@ -45,8 +53,11 @@ final readonly class CreateCardDto implements ICreateCardDto
     public function __construct(
         IUuid $userId,
         bool $main,
+        int $lastFourDigits,
         string $name,
         float $limit,
+        CardTypeEnum $type,
+        CardScopeEnum $scope,
         ?IUuid $id = null,
         ?IInactivatedAt $inactivatedAt = null,
         ?IDeletedAt $deletedAt = null,
@@ -56,8 +67,11 @@ final readonly class CreateCardDto implements ICreateCardDto
         try {
             $this->userId = $userId;
             $this->main = $main;
+            $this->lastFourDigits = $lastFourDigits;
             $this->name = $name;
             $this->limit = $limit;
+            $this->type = $type;
+            $this->scope = $scope;
             $this->id = $id ?? Uuid::random();
             $this->inactivatedAt = $inactivatedAt ?? InactivatedAt::nullable();
             $this->deletedAt = $deletedAt ?? DeletedAt::nullable();

@@ -6,13 +6,18 @@ use SavingsMate\Domain\Core\ValueObjects\Uuid;
 use SavingsMate\Domain\Interfaces\Transaction\Entities\ICard;
 use SavingsMate\Domain\Transaction\Dto\CreateCardDto;
 use SavingsMate\Domain\Transaction\Entities\Card;
+use SavingsMate\Domain\Transaction\Enums\CardScopeEnum;
+use SavingsMate\Domain\Transaction\Enums\CardTypeEnum;
 
 test('Deve criar uma instancia de Card com o ICreateCardDto', function () {
     $dto = new CreateCardDto(
-        Uuid::random(),
-        true,
-        fake()->company(),
-        fake()->randomFloat(2, 0, 1000)
+        userId: Uuid::random(),
+        main: true,
+        lastFourDigits: fake()->randomNumber(4),
+        name: fake()->company(),
+        limit: fake()->randomFloat(2, 0, 1000),
+        type: CardTypeEnum::CREDIT,
+        scope: CardScopeEnum::NATIONAL
     );
 
     $card = Card::create($dto);
@@ -23,10 +28,13 @@ test('Deve criar uma instancia de Card com o ICreateCardDto', function () {
 
 test('Deve retornar um array com os valores do Card', function () {
     $dto = new CreateCardDto(
-        Uuid::random(),
-        true,
-        fake()->company(),
-        fake()->randomFloat(2, 0, 1000)
+        userId: Uuid::random(),
+        main: true,
+        lastFourDigits: fake()->randomNumber(4),
+        name: fake()->company(),
+        limit: fake()->randomFloat(2, 0, 1000),
+        type: CardTypeEnum::CREDIT,
+        scope: CardScopeEnum::NATIONAL
     );
 
     $expectedCardToArray = [
@@ -34,7 +42,10 @@ test('Deve retornar um array com os valores do Card', function () {
         'userId' => $dto->userId->getValue(),
         'name' => $dto->name,
         'main' => $dto->main,
+        'lastFourDigits' => $dto->lastFourDigits,
         'limit' => $dto->limit,
+        'type' => $dto->type->value,
+        'scope' => $dto->scope->value,
         'inactivatedAt' => $dto->inactivatedAt->format(),
         'deletedAt' => $dto->deletedAt->format(),
         'createdAt' => $dto->createdAt->format(),
@@ -50,10 +61,13 @@ test('Deve retornar um array com os valores do Card', function () {
 
 test('Deve retornar uma string com os valores do Card', function () {
     $dto = new CreateCardDto(
-        Uuid::random(),
-        true,
-        fake()->company(),
-        fake()->randomFloat(2, 0, 1000)
+        userId: Uuid::random(),
+        main: true,
+        lastFourDigits: fake()->randomNumber(4),
+        name: fake()->company(),
+        limit: fake()->randomFloat(2, 0, 1000),
+        type: CardTypeEnum::CREDIT,
+        scope: CardScopeEnum::NATIONAL
     );
 
     $expectedCardToString = json_encode([
@@ -61,7 +75,10 @@ test('Deve retornar uma string com os valores do Card', function () {
         'userId' => $dto->userId->getValue(),
         'name' => $dto->name,
         'main' => $dto->main,
+        'lastFourDigits' => $dto->lastFourDigits,
         'limit' => $dto->limit,
+        'type' => $dto->type->value,
+        'scope' => $dto->scope->value,
         'inactivatedAt' => $dto->inactivatedAt->format(),
         'deletedAt' => $dto->deletedAt->format(),
         'createdAt' => $dto->createdAt->format(),
@@ -77,10 +94,13 @@ test('Deve retornar uma string com os valores do Card', function () {
 
 test('Deve retornar uma string json com os valores do Card', function () {
     $dto = new CreateCardDto(
-        Uuid::random(),
-        true,
-        fake()->company(),
-        fake()->randomFloat(2, 0, 1000)
+        userId: Uuid::random(),
+        main: true,
+        lastFourDigits: fake()->randomNumber(4),
+        name: fake()->company(),
+        limit: fake()->randomFloat(2, 0, 1000),
+        type: CardTypeEnum::CREDIT,
+        scope: CardScopeEnum::NATIONAL
     );
 
     $expectedCardToString = json_encode([
@@ -88,7 +108,10 @@ test('Deve retornar uma string json com os valores do Card', function () {
         'userId' => $dto->userId->getValue(),
         'name' => $dto->name,
         'main' => $dto->main,
+        'lastFourDigits' => $dto->lastFourDigits,
         'limit' => $dto->limit,
+        'type' => $dto->type->value,
+        'scope' => $dto->scope->value,
         'inactivatedAt' => $dto->inactivatedAt->format(),
         'deletedAt' => $dto->deletedAt->format(),
         'createdAt' => $dto->createdAt->format(),

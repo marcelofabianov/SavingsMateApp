@@ -27,6 +27,10 @@ final readonly class CreateBankAccountDto implements ICreateBankAccountDto
 
     public bool $main;
 
+    public string $agencyIdentifier;
+
+    public string $accountIdentifier;
+
     public float $initialBalance;
 
     public IUuid $id;
@@ -45,6 +49,8 @@ final readonly class CreateBankAccountDto implements ICreateBankAccountDto
     public function __construct(
         IUuid $userId,
         bool $main,
+        string $agencyIdentifier,
+        string $accountIdentifier,
         string $name,
         float $initialBalance,
         ?IUuid $id = null,
@@ -56,6 +62,8 @@ final readonly class CreateBankAccountDto implements ICreateBankAccountDto
         try {
             $this->userId = $userId;
             $this->main = $main;
+            $this->agencyIdentifier = $agencyIdentifier;
+            $this->accountIdentifier = $accountIdentifier;
             $this->name = $name;
             $this->initialBalance = $initialBalance;
             $this->id = $id ?? Uuid::random();
