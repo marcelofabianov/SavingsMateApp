@@ -57,7 +57,9 @@ test('Deve retornar um array com os valores do Subscription', function () {
 
     $subscription = Subscription::create($dto);
 
-    expect($subscription->toArray())->toBe($expectedSubscriptionToArray);
+    expect($subscription->toArray())
+        ->toBe($expectedSubscriptionToArray)
+        ->toBeArray();
 })
     ->group('Unit', 'Domain', 'Transaction', 'Entities', 'Subscription');
 
